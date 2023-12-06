@@ -1,0 +1,47 @@
+- [x] File structure
+- [x] Structure to components
+- [x] Create dummy pages 
+- [x] Navigation bar (Router)
+
+- [ ] State
+  - [ ] user
+  - [ ] categories
+  - [ ] guides
+
+- [ ] REST
+
+
+- [ ] Views
+- [ ] Add filtering categories
+  - [ ] Home
+    - [x] Heading
+    - [x] Hero
+    - [x] CTA
+    - [ ] Showcases ... to be continued
+  - [ ] Hub
+    - [ ] Categories - List
+    - [ ] Redirect to dedicated page (most likely)
+    - [ ] Search (based on title, description or author properties in all existing guides)
+    - [ ] 5 most viewed articles section
+    - [ ] News section (upon creating a new article, list the title, img and the author in a small card) Show latest 3
+  - [ ] Guides
+    - [ ] Categories - List
+    - [ ] Filter categories 
+    - [ ] Show Articles for the filtered categories in a list
+    - [ ] Navigate to Details upon clicking on an Article
+  - [ ] Details
+    - [ ] Guest can read the info
+    - [ ] Likes Functionality is available to unauthenticated users too
+    - [ ] To leave a comment, the user must be authenticated 
+    - [ ] If author > Edit / Delete options
+  - [ ] Auth
+    - [ ] Register
+    - [ ] Login
+    - [ ] Logout
+  - [ ] Profile
+    - [ ] User Info
+    - [ ] Create Article option
+    - [ ] List of created own articles
+    - [ ] Likes indicator on each of them
+    - [ ] Filter based on Likes or creationDate
+    - [ ] Logout option
