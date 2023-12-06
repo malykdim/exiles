@@ -3,12 +3,11 @@
 Conan Exiles Game Community Hub ---
 'made by people who play it'
 
-<br><hr><br>
+# &nbsp;
 
 ![Conan Exiles](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTXGH_z2eJRteruLgQtup5KMvCciAoV04RTw&usqp=CAU)
 
-
-<br><hr><br>
+# &nbsp;
 
 
 ### Roles:
@@ -35,9 +34,11 @@ Conan Exiles Game Community Hub ---
 - Technical Info
 - User
 
-<br><hr><br>
+# &nbsp;
+
 
 #### [Conan Exiles](https://www.conanexiles.com/) + [Steam](https://store.steampowered.com/) + [Conan Exiles Wiki](https://conanexiles.fandom.com/wiki/Conan_Exiles_Wiki).
 
 
-<br><hr><br>
+# &nbsp;
+
