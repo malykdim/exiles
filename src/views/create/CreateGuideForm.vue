@@ -1,5 +1,14 @@
 <script>
+// import CustomInput from '../../components/custom-input/CustomInput.vue';
+import { useVuelidate } from '@vuelidate/core';
+import { required, url } from '@vuelidate/validators';
+
 export default {
+  setup() {
+    return {
+      v$: useVuelidate(),
+    };
+  },
   data() {
     return {
       guide: {
@@ -15,18 +24,52 @@ export default {
       },
     };
   },
+  methods: {
+    async onSubmit() {
+      const isValid = await this.v$.$validate();
+      console.log('isValid', isValid, this.v$);
+
+      if (isValid) {
+        console.log('success', this.guide);
+      }
+
+      // make post request
+      // if successful -> redirect to profile (own guides)
+    },
+  },
+  validations() {
+    return {
+      guide: {
+        title: { required },
+        thumbnail: { required, url },
+        // categories: [],
+        content: { required },
+        terms: { required },
+      },
+    };
+  },
 };
 </script>
 
 <template>
   <h4>Create Guide Form</h4>
-  <form class="create-guide container">
+  <form class="create-guide container" @submit.prevent="onSubmit">
+    <!-- <div class="summary">
+      <CustomInput id="summary" v-model="data.summary">
+        summary
+      </CustomInput>
+    </div> -->
     <div class="three-cols">
       <!-- title, author, thumbnail -->
       <div class="first">
         <div class="input-type">
           <label for="title" class="label">title</label>
-          <input id="title" v-model="guide.title" type="text">
+          <input id="title" v-model="v$.guide.title.$model" type="text">
+          <div v-for="error of v$.guide.title.$errors" :key="error.$uid" class="input-errors">
+            <div class="error-msg">
+              {{ error.$message }}
+            </div>
+          </div>
         </div>
         <div class="input-type">
           <label for="author" class="label">author</label>
@@ -34,7 +77,12 @@ export default {
         </div>
         <div class="input-type">
           <label for="thumbnail" class="label">thumbnail</label>
-          <input id="thumbnail" v-model="guide.thumbnail" type="text">
+          <input id="thumbnail" v-model="v$.guide.thumbnail.$model" type="text">
+          <div v-for="error of v$.guide.thumbnail.$errors" :key="error.$uid" class="input-errors">
+            <div class="error-msg">
+              {{ error.$message }}
+            </div>
+          </div>
         </div>
         <div class="input-type">
           <label for="year" class="label">year of creation</label>
@@ -161,7 +209,7 @@ export default {
       <!-- content, terms -->
       <div class="third">
         <div class="input-type">
-          <label for="" class="label">content if article / description for video</label>
+          <label for="content" class="label">content if article / description for video</label>
           <textarea
             id="content"
             v-model="guide.content"
@@ -170,6 +218,11 @@ export default {
             rows="15"
             class="textarea"
           />
+          <div v-for="error of v$.guide.content.$errors" :key="error.$uid" class="input-errors">
+            <div class="error-msg">
+              {{ error.$message }}
+            </div>
+          </div>
         </div>
       </div>
     </div><br>
@@ -177,13 +230,18 @@ export default {
     <div class="terms">
       <input
         id="terms"
-        v-model="guide.terms"
+        v-model="v$.guide.terms.$model"
         true-value="yes"
         false-value="no"
         type="checkbox"
         class="accept"
       ><!-- true / flase  no value required (selected or not selected checkbox) -->
       <label for="terms" class="label">Terms and Conditions</label>
+      <div v-for="error of v$.guide.terms.$errors" :key="error.$uid" class="input-errors">
+        <div class="error-msg">
+          {{ error.$message }}
+        </div>
+      </div>
     </div><br>
 
     <!-- submit -->
@@ -215,9 +273,9 @@ export default {
                   font-size: smaller;
                   .input {
 
-                    // &[type=radio], &[type=checkbox] {
-                    //   background-color: red;
-                    // }
+                    &[type=radio], &[type=checkbox] {
+                      background-color: red;
+                    }
                   }
                   .label {
                   font-family: serif;

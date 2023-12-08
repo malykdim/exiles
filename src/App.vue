@@ -23,7 +23,8 @@ export default {
 </script>
 
 <template>
-  <AppHeader @on-select="onNavigate" />
+  <!-- <AppHeader @on-select="onNavigate" /> -->
+  <AppHeader />
   <main>
     <!-- <component :is="view" @on-cta.prevent="onNavigate" /> -->
     <RouterView />
