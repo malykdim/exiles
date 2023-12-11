@@ -1,17 +1,26 @@
 <script>
-import { guides } from '../../constants/guides.js';
+import useGuidesStore from '../../store/guidesStore.js';
+import { getAllGuides } from '../../dataProviders/guides.js';
+
 import Filters from './components/Filters.vue';
 import ListItemCard from './components/ListItemCard.vue';
 
 export default {
   components: { ListItemCard, Filters },
+  setup() {
+    const guidesStore = useGuidesStore();
+    return { guidesStore };
+  },
   data() {
     return {
-      guides,
-      selectedCategory: '',
+      guides: [],
+      isLoading: true,
+      // selectedCategory: '',
     };
   },
-  computed: {
+  async created() {
+    this.guides = await getAllGuides();
+    this.isLoading = false;
     // selected() {
     //   if (this.selectedCategory === '') {
     //     return this.guides;
@@ -19,6 +28,9 @@ export default {
 
     //   return this.guides.filter(item => item.categories === this.selectedCategory);
     // },
+  },
+  mounted() {
+    console.log(this.guidesStore.guides);
   },
   methods: {
     // filter(category) {
@@ -31,7 +43,9 @@ export default {
     // onFilterSelect(selected) {
     //   this.selectedFilter = selected;
     // },
-
+    update() {
+      this.guidesStore.updateGguides([{ title: 'eco' }]);
+    },
   },
 };
 </script>
@@ -43,15 +57,17 @@ export default {
         Guides
       </h2>
       <br><br>
-
       <!-- <Filters :active-item="selectedFilter" @on-select="onFilterSelect" /> -->
-      <Filters />
-
+      <!-- <Filters /> -->
       <br><br>
+
+      <p v-if="isLoading">
+        loading...
+      </p>
       <div else class="articles">
         <div class="list">
-          <!-- <ListItemCard v-for="item in selected" :key="`guides-${item.id}`" :item="item" /> -->
-          <ListItemCard />
+          <ListItemCard v-for="item in guides" :key="`guides-${item.objectId}`" :item="item" />
+          <!-- <ListItemCard /> -->
         </div>
       </div>
     </div>

@@ -39,7 +39,7 @@ export default {
     <h6 class="author">
       {{ item.author }}
     </h6>
-    <span class="rating">rating: <strong>{{ item.rating }}</strong></span><br><br>
+    <!-- <span class="rating">rating: <strong>{{ item.rating }}</strong></span><br><br> -->
     <button class="navigate">
       Have a look =)
     </button>
