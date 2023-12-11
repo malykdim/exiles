@@ -1,8 +1,11 @@
 <!-- eslint-disable vue/max-attributes-per-line -->
 <script>
 import { mapActions } from 'pinia';
+import axios from 'axios';
+
 import { useUserStore } from '../../store/userStore';
 import { login } from '../../dataProviders/auth';
+
 import Spinner from '../../components/spinner/Spinner.vue';
 
 export default {
@@ -15,6 +18,7 @@ export default {
         email: '',
         password: '',
       },
+      myCurrentSessionToken: '',
     };
   },
   methods: {
@@ -30,6 +34,80 @@ export default {
       }
 
       this.isLoading = false;
+    },
+    async signup() {
+      const apiUrl = 'https://parseapi.back4app.com/users';
+
+      try {
+        const response = await axios.post(
+          apiUrl,
+          {
+            username: this.user.username,
+            email: this.user.email,
+            password: this.user.password,
+          },
+          {
+            headers: {
+              'X-Parse-Application-Id': 'Zm8xJaH8lMQOAsMPd5VTtDh53EBtPNFE62MdeHVr',
+              'X-Parse-REST-API-Key': 'O0LlHeH48pTytyyBz2NFEFGMwjKfSmukFbkjSVdE',
+              'X-Parse-Revocable-Session': '1',
+              'Content-Type': 'application/json',
+            },
+          },
+        );
+        // this.user = response.user;
+        console.log('response: ', response);
+      }
+      catch (error) {
+        console.error('Error while signing user up: ', error);
+      }
+    },
+    async login() {
+      const apiUrl = 'https://parseapi.back4app.com/login';
+
+      try {
+        const response = await axios.get(
+          apiUrl,
+          {
+            username: this.user.username,
+            password: this.user.password,
+          },
+          {
+            headers: {
+              'X-Parse-Application-Id': 'Zm8xJaH8lMQOAsMPd5VTtDh53EBtPNFE62MdeHVr',
+              'X-Parse-REST-API-Key': 'O0LlHeH48pTytyyBz2NFEFGMwjKfSmukFbkjSVdE',
+              'X-Parse-Revocable-Session': '1',
+            },
+          },
+        );
+        // this.user = response.user;
+        console.log('response: ', response);
+      }
+      catch (error) {
+        console.error('Error while logging in user: ', error);
+      }
+    },
+    async logout() {
+      const apiUrl = 'https://parseapi.back4app.com/logout';
+
+      try {
+        const response = await axios.post(
+          apiUrl,
+          {},
+          {
+            headers: {
+              'X-Parse-Application-Id': 'Zm8xJaH8lMQOAsMPd5VTtDh53EBtPNFE62MdeHVr',
+              'X-Parse-REST-API-Key': 'O0LlHeH48pTytyyBz2NFEFGMwjKfSmukFbkjSVdE',
+              'X-Parse-Session-Token': this.myCurrentSessionToken,
+            },
+          },
+        );
+        console.log('response: ', response);
+        // this.user = response.user; ??? null?
+      }
+      catch (error) {
+        console.error('Error while logging in user: ', error);
+      }
     },
   },
 };
