@@ -3,7 +3,14 @@
 import { useVuelidate } from '@vuelidate/core';
 import { required, url } from '@vuelidate/validators';
 
+// import FormItem from './components/FormItem.vue';
+import NestedSection from './components/NestedSection.vue';
+import Content from './components/Content.vue';
+import Details from './components/Details.vue';
+import About from './components/About.vue';
+
 export default {
+  components: { NestedSection, About, Details, Content },
   setup() {
     return {
       v$: useVuelidate(),
@@ -36,6 +43,7 @@ export default {
       // make post request
       // if successful -> redirect to profile (own guides)
     },
+
   },
   validations() {
     return {
@@ -53,6 +61,7 @@ export default {
 
 <template>
   <h4>Create Guide Form</h4>
+
   <form class="create-guide container" @submit.prevent="onSubmit">
     <!-- <div class="summary">
       <CustomInput id="summary" v-model="data.summary">
@@ -71,6 +80,13 @@ export default {
             </div>
           </div>
         </div>
+
+        <!-- <NestedSection /> -->
+
+        <!-- <FormItem field="summary" label="summary" required>
+          <input id="summary" type="text">
+        </FormItem> -->
+
         <div class="input-type">
           <label for="author" class="label">author</label>
           <input id="author" v-model="guide.author" type="text">
@@ -88,6 +104,8 @@ export default {
           <label for="year" class="label">year of creation</label>
           <input id="year" v-model="guide.year" type="number">
         </div>
+
+        <!-- <About /> -->
       </div>
 
       <!-- type, map, categories, year -->
@@ -204,6 +222,8 @@ export default {
             <label for="encounters" class="label">encounters</label>
           </fieldset>
         </div>
+
+        <Details />
       </div>
 
       <!-- content, terms -->
@@ -224,6 +244,7 @@ export default {
             </div>
           </div>
         </div>
+        <Content />
       </div>
     </div><br>
 
