@@ -191,9 +191,7 @@ export default {
         </div>
         <div>
           <button :disabled="isLoading">
-            <span v-if="isLoading">
-              <Spinner />
-            </span>
+            <Spinner v-if="isLoading" />
             <span v-else>{{ isLogin ? 'Login' : 'Sign up' }}</span>
           </button>
         </div>

@@ -12,6 +12,10 @@ export const useUserStore = defineStore(
             currentSessionToken: null,
         }),
         actions: {
+            setProfile(profileData) {
+                this.profile = profileData;
+                this.isAuthenticated = true;
+            },
             async signUp(username, email, password) {
                 try {
                     const response = await axios.post(
@@ -70,10 +74,6 @@ export const useUserStore = defineStore(
                     // display the error
                     return error;
                 }
-            },
-            setProfile(profileData) {
-                this.profile = profileData;
-                this.isAuthenticated = true;
             },
             async logOut() {
                 try {

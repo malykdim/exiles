@@ -16,7 +16,7 @@ export default {
   .spiner {
     width: 24px;
     height: 24px;
-    border: 5px solid #fff;
+    border: 2px solid #fff;
     border-bottom-color: transparent;
     border-radius: 50%;
     display: inline-block;

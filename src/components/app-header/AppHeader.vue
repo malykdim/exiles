@@ -1,4 +1,7 @@
 <script>
+import { mapState } from 'pinia';
+import { useUserStore } from '../../store/userStore.js';
+
 export default {
   data() {
     return {
@@ -11,6 +14,9 @@ export default {
         { url: '/logout', text: 'logout' },
       ],
     };
+  },
+  computed: {
+    ...mapState(useUserStore, ['user']),
   },
 };
 </script>
@@ -32,6 +38,11 @@ export default {
           <li v-for="page in pages" :key="page.url" class="nav-item">
             <router-link :to="page.text">
               {{ page.text }}
+            </router-link>
+          </li>
+          <li v-if="user">
+            <router-link to="/profile">
+              <strong>username{{ user.username }}</strong>
             </router-link>
           </li>
         </ul>
