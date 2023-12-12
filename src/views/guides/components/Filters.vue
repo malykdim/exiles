@@ -1,6 +1,5 @@
 <script>
-import { guides } from '../../../constants/guides';
-
+// deleted import of a json file: /constants/guides.js and deleted the file all togethr
 export default {
   props: {
     activeItem: {
@@ -11,7 +10,7 @@ export default {
   emits: ['onSelect'],
   data() {
     return {
-      guides,
+      // guides,
     };
   },
   methods: {

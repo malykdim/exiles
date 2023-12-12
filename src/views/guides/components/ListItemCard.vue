@@ -5,13 +5,9 @@ export default {
       type: Object,
       required: true,
       default: () => ({
-        id: -1,
+        objectId: null,
         title: 'Title',
-        content: 'Lorem ipsum dolor sit amet consectetur',
-        rating: 0,
         author: 'author',
-        categories: 'category tags',
-        image: '/public/vite.svg',
         thumbnail: '../../../public/vite.svg',
       }),
     },
@@ -20,6 +16,11 @@ export default {
     return {
 
     };
+  },
+  methods: {
+    onNavigate(id) {
+      this.$router.push(`/guides/${id}`);
+    },
   },
 };
 </script>
@@ -40,7 +41,7 @@ export default {
       {{ item.author }}
     </h6>
     <!-- <span class="rating">rating: <strong>{{ item.rating }}</strong></span><br><br> -->
-    <button class="navigate">
+    <button class="navigate" @click="onNavigate(item.objectId)">
       Have a look =)
     </button>
   </article>

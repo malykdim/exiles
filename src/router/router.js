@@ -5,15 +5,15 @@ import { useUserStore } from '../store/userStore';
 import Home from '../views/home/Home.vue';
 import Hub from '../views/hub/Hub.vue';
 import Guides from '../views/guides/Guides.vue';
-
 import Auth from '../views/auth/Auth.vue';
 import Profile from '../views/profile/Profile.vue';
 import NotFound from '../components/wildcards/NotFound.vue';
 import CreateGuideForm from '../views/create/CreateGuideForm.vue';
+import Details from '../views/details/Details.vue';
 
 function validateUser() {
     const userStore = useUserStore();
-    return userStore.isAuthenticated ? useUserStore.isAuthenticated : { path: '/auth' };
+    return userStore.isAuthenticated ? useUserStore.isAuthenticated : { path: '/login' };
 };
 
 const routes = [
@@ -28,20 +28,27 @@ const routes = [
     {
         path: '/guides',
         component: Guides,
+        children: [
+            { path: '/:id', component: Details },
+        ],
+    },
+    {
+        path: '/details',
+        component: Details,
     },
     {
         path: '/create',
         component: CreateGuideForm,
     },
     {
-        path: '/auth',
+        path: '/login',
         name: 'auth',
         component: Auth,
     },
     {
         path: '/profile',
         component: Profile,
-        beforeEnter: validateUser,
+        // beforeEnter: validateUser,
     },
     {
         path: '/:pathMatch(.*)*',

@@ -1,15 +1,15 @@
 <script>
-import { mapState } from 'pinia';
-import { useUserStore } from '../../store/userStore.js';
+// import { mapState } from 'pinia';
+// import { useUserStore } from '../../store/userStore.js';
 
 export default {
   computed: {
-    ...mapState(useUserStore, ['profile', 'isAuthenticated']),
+    // ...mapState(useUserStore, ['profile', 'isAuthenticated']),
   },
   created() {
-    if (!this.isAuthenticated) {
-      this.$router.push('/auth');
-    }
+    // if (!this.isAuthenticated) {
+    // this.$router.push('/auth');
+    // }
   },
 };
 </script>
@@ -18,7 +18,7 @@ export default {
   <div>
     <article class="card">
       <h4>Profile</h4>
-      <p>{{ profile.username }}</p>
+      <!-- <p>{{ profile.username }}</p> -->
     </article>
   </div>
 </template>

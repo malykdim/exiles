@@ -6,8 +6,9 @@ export default {
         { url: '/hub', text: 'hub' },
         { url: '/guides', text: 'guides' },
         { url: '/create', text: 'create' },
-        { url: '/auth', text: 'auth' },
+        { url: '/auth', text: 'login' },
         { url: '/profile', text: 'profile' },
+        { url: '/logout', text: 'logout' },
       ],
     };
   },
@@ -32,7 +33,6 @@ export default {
             <router-link :to="page.text">
               {{ page.text }}
             </router-link>
-            <!-- <a href="#" class="link" @click.prevent="onSelect('Auth')">Auth</a> -->
           </li>
         </ul>
       </nav>

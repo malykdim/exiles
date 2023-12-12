@@ -4,7 +4,7 @@ import { mapActions } from 'pinia';
 import axios from 'axios';
 
 import { useUserStore } from '../../store/userStore';
-import { login } from '../../dataProviders/auth';
+import { login, signup } from '../../dataProviders/auth';
 
 import Spinner from '../../components/spinner/Spinner.vue';
 
@@ -12,6 +12,7 @@ export default {
   components: { Spinner },
   data() {
     return {
+      isLogin: true,
       isLoading: false,
       user: {
         username: '',
@@ -26,11 +27,29 @@ export default {
     async onSubmit() {
       this.isLoading = true;
 
-      const userData = await login(this.user);
-      console.log('userData', userData);
-      if (userData) {
-        this.setProfile(userData);
-        this.$router.push('/profile');
+      if (this.isLogin) {
+        const userData = await login(this.user.username, this.user.password);
+        console.log('login', this.user);
+        console.log('userData', userData);
+        if (userData) {
+          this.setProfile(userData);
+          // localStorage
+          this.$router.push('/profile');
+        }
+      }
+      else {
+        const userData = await this.signup(this.user.username, this.user.email, this.user.password);
+        console.log('signup', this.user);
+        /*
+        {username: 'dina', email: 'dina@example.com', password: '123456'}
+        */
+        console.log('userData', userData);
+        /* undefined */
+        if (userData) {
+          this.setProfile(userData); // undefined
+          // localStorage
+          this.$router.push('/profile');
+        }
       }
 
       this.isLoading = false;
@@ -57,6 +76,16 @@ export default {
         );
         // this.user = response.user;
         console.log('response: ', response);
+        /*
+          {
+              data: {
+                  createdAt: "2023-12-12T01:25:09.433Z",
+                  objectId: "2Co4McQYbJ",
+                  sessionToken: "r:f09ee1871a8ca7e472ceb046624cc3f1"
+              },
+              status: 201
+          }
+        */
       }
       catch (error) {
         console.error('Error while signing user up: ', error);
@@ -109,6 +138,9 @@ export default {
         console.error('Error while logging in user: ', error);
       }
     },
+    toggleIsLogin() {
+      this.isLogin = !this.isLogin;
+    },
   },
 };
 </script>
@@ -117,11 +149,11 @@ export default {
   <section class="container">
     <div class="heading">
       <h2 class="title">
-        Auth
+        {{ isLogin ? 'Login' : 'Signup' }}
       </h2>
       <br><br>
-      <p class="slogan">
-        form
+      <p class="slogan" @click="toggleIsLogin">
+        {{ isLogin ? 'or Register' : 'or Login' }}
       </p>
     </div>
     <article class="auth">
@@ -137,7 +169,7 @@ export default {
             :disabled="isLoading"
           >
         </div>
-        <div>
+        <div v-if="!isLogin">
           <label for="email">email</label>
           <input
             id="email"
@@ -162,7 +194,7 @@ export default {
             <span v-if="isLoading">
               <Spinner />
             </span>
-            <span v-else>Sign up</span>
+            <span v-else>{{ isLogin ? 'Login' : 'Sign up' }}</span>
           </button>
         </div>
       </form>

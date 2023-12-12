@@ -11,22 +11,14 @@ export default {
   },
   data() {
     return {
-      view: 'Home',
     };
-  },
-  methods: {
-    // onNavigate(path) {
-    //   this.view = path;
-    // },
   },
 };
 </script>
 
 <template>
-  <!-- <AppHeader @on-select="onNavigate" /> -->
   <AppHeader />
   <main>
-    <!-- <component :is="view" @on-cta.prevent="onNavigate" /> -->
     <RouterView />
   </main>
   <AppFooter />

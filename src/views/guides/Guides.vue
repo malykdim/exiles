@@ -2,11 +2,12 @@
 import useGuidesStore from '../../store/guidesStore.js';
 import { getAllGuides } from '../../dataProviders/guides.js';
 
-import Filters from './components/Filters.vue';
+// import Filters from './components/Filters.vue';
+import Spinner from '../../components/spinner/Spinner.vue';
 import ListItemCard from './components/ListItemCard.vue';
 
 export default {
-  components: { ListItemCard, Filters },
+  components: { ListItemCard, Spinner },
   setup() {
     const guidesStore = useGuidesStore();
     return { guidesStore };
@@ -61,10 +62,9 @@ export default {
       <!-- <Filters /> -->
       <br><br>
 
-      <p v-if="isLoading">
-        loading...
-      </p>
-      <div else class="articles">
+      <Spinner v-if="isLoading" />
+
+      <div v-else class="articles">
         <div class="list">
           <ListItemCard v-for="item in guides" :key="`guides-${item.objectId}`" :item="item" />
           <!-- <ListItemCard /> -->
