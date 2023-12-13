@@ -50,7 +50,7 @@ Conan Exiles Game Community Hub ---
 # &nbsp;
 
 
-#### Inspired by
+## Inspired by
 
 ![Conan Exiles](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTXGH_z2eJRteruLgQtup5KMvCciAoV04RTw&usqp=CAU)
 

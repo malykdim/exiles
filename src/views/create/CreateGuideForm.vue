@@ -2,15 +2,19 @@
 // import CustomInput from '../../components/custom-input/CustomInput.vue';
 import { useVuelidate } from '@vuelidate/core';
 import { required, url } from '@vuelidate/validators';
+import axios from 'axios';
+
+// import { createGuide } from '../../dataProviders/guides.js';
 
 // import FormItem from './components/FormItem.vue';
-import NestedSection from './components/NestedSection.vue';
-import Content from './components/Content.vue';
-import Details from './components/Details.vue';
-import About from './components/About.vue';
+// import NestedSection from './components/NestedSection.vue';
+import GuideContent from './components/GuideContent.vue';
+import GuideDetails from './components/GuideDetails.vue';
+
+// import About from './components/About.vue';
 
 export default {
-  components: { NestedSection, About, Details, Content },
+  components: { GuideContent, GuideDetails },
   setup() {
     return {
       v$: useVuelidate(),
@@ -27,7 +31,7 @@ export default {
         categories: [],
         content: '',
         year: null,
-        terms: '',
+        terms: true,
       },
     };
   },
@@ -41,7 +45,39 @@ export default {
       }
 
       // make post request
-      // if successful -> redirect to profile (own guides)
+      try {
+        const response = await axios.post(
+          'https://parseapi.back4app.com/classes/Guides',
+          {
+            title: this.guide.title,
+            summary: '',
+            author: this.guide.author,
+            thumbnail: this.guide.thumbnail,
+            type: this.guide.type,
+            map: this.guide.map,
+            categories: [this.guide.categories],
+            content: this.guide.content,
+            year: this.guide.year.toString(),
+            terms: true,
+          },
+          {
+            headers: {
+              'X-Parse-Application-Id': 'Zm8xJaH8lMQOAsMPd5VTtDh53EBtPNFE62MdeHVr',
+              'X-Parse-REST-API-Key': 'O0LlHeH48pTytyyBz2NFEFGMwjKfSmukFbkjSVdE',
+              'Content-Type': 'application/json',
+            },
+          },
+        );
+
+        console.log(response.data);
+        return response.data;
+      }
+      catch (error) {
+        console.error(error.message);
+        return error.message;
+      }
+      // eslint-disable-next-line no-unreachable
+      this.$router.push('/guides');
     },
 
   },
@@ -223,7 +259,7 @@ export default {
           </fieldset>
         </div>
 
-        <Details />
+        <GuideDetails />
       </div>
 
       <!-- content, terms -->
@@ -244,7 +280,7 @@ export default {
             </div>
           </div>
         </div>
-        <Content />
+        <GuideContent />
       </div>
     </div><br>
 

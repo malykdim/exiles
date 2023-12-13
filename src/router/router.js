@@ -36,7 +36,7 @@ const routes = [
     {
         path: '/create',
         component: CreateGuideForm,
-        beforeEnter: validateUser,
+        // beforeEnter: validateUser,
     },
     {
         path: '/login',

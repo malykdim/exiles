@@ -23,8 +23,9 @@ export const useUserStore = defineStore(
             getUser() {
                 const user = sessionStorage.getItem('user');
 
-                if (!user)
+                if (!user) {
                     return;
+                }
 
                 this.user = JSON.parse(user);
                 this.isAuthenticated = true;
