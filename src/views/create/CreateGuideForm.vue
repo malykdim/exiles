@@ -50,7 +50,7 @@ export default {
           'https://parseapi.back4app.com/classes/Guides',
           {
             title: this.guide.title,
-            summary: '',
+            summary: 'asdff',
             author: this.guide.author,
             thumbnail: this.guide.thumbnail,
             type: this.guide.type,
