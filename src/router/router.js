@@ -28,28 +28,29 @@ const routes = [
     {
         path: '/guides',
         component: Guides,
-        children: [
-            { path: '/:id', component: Details },
-        ],
     },
     {
-        path: '/details',
+        path: '/guides/:id',
         component: Details,
     },
     {
         path: '/create',
         component: CreateGuideForm,
-        // beforeEnter: validateUser,
+        beforeEnter: validateUser,
     },
     {
         path: '/login',
         name: 'auth',
         component: Auth,
+        beforeEnter: () => {
+            const userStore = useUserStore();
+            return userStore.isAuthenticated ? { path: '/profile' } : true;
+        },
     },
     {
         path: '/profile',
         component: Profile,
-        // beforeEnter: validateUser,
+        beforeEnter: validateUser,
     },
     {
         path: '/:pathMatch(.*)*',

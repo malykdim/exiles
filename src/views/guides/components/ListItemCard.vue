@@ -49,6 +49,7 @@ export default {
 
 <style lang="scss" scoped>
 .list-item-card {
+  max-width: 20rem;
     .img-wrapper {
         .img {
             width: 100%;

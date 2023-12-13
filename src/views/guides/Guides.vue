@@ -52,7 +52,7 @@ export default {
 </script>
 
 <template>
-  <section class="container">
+  <div class="box">
     <div class="heading">
       <h2 class="title">
         Guides
@@ -61,64 +61,54 @@ export default {
       <!-- <Filters :active-item="selectedFilter" @on-select="onFilterSelect" /> -->
       <!-- <Filters /> -->
       <br><br>
+    </div>
+    <Spinner v-if="isLoading" />
 
-      <Spinner v-if="isLoading" />
-
-      <div v-else class="articles">
-        <div class="list">
-          <ListItemCard v-for="item in guides" :key="`guides-${item.objectId}`" :item="item" />
-          <!-- <ListItemCard /> -->
-        </div>
+    <div v-else class="articles">
+      <div class="list">
+        <ListItemCard v-for="item in guides" :key="`guides-${item.objectId}`" :item="item" />
+        <!-- <ListItemCard /> -->
       </div>
     </div>
-  </section>
+
+    <router-view />
+  </div>
 </template>
 
 <style lang="scss" scoped>
-.container {
+.box {
+  width: 920px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   .heading {
     margin-bottom: 5rem;
     .title {
       font-size: 100px;
       font-weight: 100;
     }
-    .slogan {
-      font-size: 24px;
-      font-weight: 200;
-    }
-    .categories {
-      // width: 100px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: .5rem;
-      .topics {
-        padding: 1rem 2rem;
-        margin-top: 0;
-        width: 9.5rem;
-      }
-    }
   }
-  .flex {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5rem;
-    max-width: 100vw;
+  .articles {
+    width: 70vw;
+    margin: 0 auto;
+    .list {
+        // width: 100px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: .5rem;
+        align-items: center;
+  justify-content: center;
 
-    .hero {
-      height: 600px;
-      width: 70%;
-      background-image: linear-gradient(to bottom, transparent, transparent), url('../../assets/2.jpg');
-      background-color: transparent;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
+        .topics {
+          padding: 1rem 2rem;
+          margin-top: 0;
+          width: 9.5rem;
+        }
+
     }
-    .cta {
-      text-align: center;
-      font-size: larger;
-      max-width: 20%;
-    }
+
   }
 
 }
