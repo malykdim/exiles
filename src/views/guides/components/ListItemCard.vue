@@ -52,8 +52,8 @@ export default {
   max-width: 20rem;
     .img-wrapper {
         .img {
-            width: 100%;
-            height: 100%;
+            width: 320px;
+            height: 180px;
             // display: block;
         }
     }

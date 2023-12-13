@@ -57,10 +57,8 @@ export default {
       <h2 class="title">
         Guides
       </h2>
-      <br><br>
       <!-- <Filters :active-item="selectedFilter" @on-select="onFilterSelect" /> -->
       <!-- <Filters /> -->
-      <br><br>
     </div>
     <Spinner v-if="isLoading" />
 
@@ -77,14 +75,14 @@ export default {
 
 <style lang="scss" scoped>
 .box {
-  width: 920px;
+  width: 95vw;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   .heading {
-    margin-bottom: 5rem;
+    margin-bottom: 0;
     .title {
       font-size: 100px;
       font-weight: 100;
