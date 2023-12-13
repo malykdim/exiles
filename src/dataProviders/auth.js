@@ -1,33 +1,5 @@
 import axios from 'axios';
 
-export async function login(userData) {
-    const apiUrl = 'https://parseapi.back4app.com/login';
-
-    try {
-        const response = await axios.get(
-            apiUrl,
-            {
-                username: userData.username,
-                password: userData.password,
-            },
-            {
-                headers: {
-                    'X-Parse-Application-Id': 'Zm8xJaH8lMQOAsMPd5VTtDh53EBtPNFE62MdeHVr',
-                    'X-Parse-REST-API-Key': 'O0LlHeH48pTytyyBz2NFEFGMwjKfSmukFbkjSVdE',
-                    'X-Parse-Revocable-Session': '1',
-                },
-            },
-        );
-        console.log('response: ', response);
-        // this.user = response.user;
-        return response;
-    }
-    catch (e) {
-        console.error('Error: ', e);
-        return null;
-    }
-}
-
 export async function signup(username, email, password) {
     const apiUrl = 'https://parseapi.back4app.com/users';
 
@@ -49,10 +21,58 @@ export async function signup(username, email, password) {
             },
         );
         console.log('response: ', response);
+
+        //         this.user = response.body; // objectId, createdAt and sessionToken
+
+        //         this.currentSessionToken = response.body.sessionToken;
+
+        //         // save the token in localStorage
+        //         // redirect to Hub page or Profile page
+
         return response;
     }
     catch (error) {
         console.error('Error while signing user up: ', error);
+
+        // return error;
+        return null;
+    }
+}
+
+export async function login(username, password) {
+    const encodedUsername = encodeURIComponent(username);
+    const encodedPassword = encodeURIComponent(password);
+    const apiUrl = `https://parseapi.back4app.com/login?username=${encodedUsername}&password=${encodedPassword}`;
+    // Pass the username and password in URL parameters. It should be encoded JSON.
+
+    try {
+        const response = await axios.get(
+            apiUrl,
+            {
+                headers: {
+                    'X-Parse-Application-Id': 'Zm8xJaH8lMQOAsMPd5VTtDh53EBtPNFE62MdeHVr',
+                    'X-Parse-REST-API-Key': 'O0LlHeH48pTytyyBz2NFEFGMwjKfSmukFbkjSVdE',
+                    'X-Parse-Revocable-Session': '1',
+                },
+            },
+        );
+        console.log('response: ', response);
+
+        console.log('response: ', response.data);
+        // this.user = response.user;
+
+        // this.user = response.body; // objectId, createdAt and sessionToken
+        // this.currentSessionToken = response.body.sessionToken;
+        // save the token in localStorage
+        // redirect to Hub page or Profile page
+
+        return response;
+    }
+    catch (e) {
+        // display the error
+        console.error('Error: ', e);
+
+        //  return error;
         return null;
     }
 }
@@ -74,6 +94,13 @@ export async function logout(currentSessionToken) {
         );
         console.log('response: ', response);
         // this.user = response.user; ??? null?
+
+        //         console.log(response);
+        //         this.user = null; // objectId, createdAt and sessionToken
+        //         this.currentSessionToken = null;
+        //         clear the token from localStorage
+        //         redirect to Home page
+
         return response;
     }
     catch (error) {

@@ -4,7 +4,7 @@ import { useUserStore } from '../../store/userStore.js';
 
 export default {
   computed: {
-    // ...mapState(useUserStore, ['user', 'isAuthenticated']),
+    ...mapState(useUserStore, ['user', 'isAuthenticated']),
   },
   // created() {
   //   if (!this.isAuthenticated) {
@@ -18,7 +18,7 @@ export default {
   <div class="container">
     <div class="heading">
       <h2 class="title">
-        username
+        {{ user.data.username }}
       </h2>
       <br><br>
       <p class="slogan" @click="toggleIsLogin">
@@ -27,7 +27,7 @@ export default {
     </div>
     <article class="card">
       <div class="user-info">
-        <p>email</p>
+        <p>{{ user.data.email }}</p>
       </div>
       <router-link to="/guides">
         View Guides

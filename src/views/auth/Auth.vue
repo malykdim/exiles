@@ -1,11 +1,9 @@
 <!-- eslint-disable vue/max-attributes-per-line -->
 <script>
 import { mapActions } from 'pinia';
-import axios from 'axios';
 
-import { useUserStore } from '../../store/userStore';
 import { login, signup } from '../../dataProviders/auth';
-
+import { useUserStore } from '../../store/userStore';
 import Spinner from '../../components/spinner/Spinner.vue';
 
 export default {
@@ -19,7 +17,7 @@ export default {
         email: '',
         password: '',
       },
-      myCurrentSessionToken: '',
+      currentSessionToken: '', // computed?
     };
   },
   methods: {
@@ -33,27 +31,41 @@ export default {
         console.log('userData', userData);
         if (userData) {
           this.setProfile(userData);
-          // localStorage
           this.$router.push('/profile');
         }
+        this.isLoading = false;
       }
       else {
-        const userData = await this.signup(this.user.username, this.user.email, this.user.password);
+        const userData = await signup(this.user.username, this.user.email, this.user.password);
         console.log('signup', this.user);
         /*
         {username: 'dina', email: 'dina@example.com', password: '123456'}
         */
         console.log('userData', userData);
         /* undefined */
+        /*
+          {
+              data: {
+                  createdAt: "2023-12-12T01:25:09.433Z",
+                  objectId: "2Co4McQYbJ",
+                  sessionToken: "r:f09ee1871a8ca7e472ceb046624cc3f1"
+              },
+              status: 201
+          }
+        */
+
         if (userData) {
-          this.setProfile(userData); // undefined
-          // localStorage
+          useUserStore.setProfile(userData);
           this.$router.push('/profile');
         }
       }
 
       this.isLoading = false;
     },
+    toggleIsLogin() {
+      this.isLogin = !this.isLogin;
+    },
+
     async signup() {
       const apiUrl = 'https://parseapi.back4app.com/users';
 
@@ -76,16 +88,6 @@ export default {
         );
         // this.user = response.user;
         console.log('response: ', response);
-        /*
-          {
-              data: {
-                  createdAt: "2023-12-12T01:25:09.433Z",
-                  objectId: "2Co4McQYbJ",
-                  sessionToken: "r:f09ee1871a8ca7e472ceb046624cc3f1"
-              },
-              status: 201
-          }
-        */
       }
       catch (error) {
         console.error('Error while signing user up: ', error);
@@ -127,7 +129,7 @@ export default {
             headers: {
               'X-Parse-Application-Id': 'Zm8xJaH8lMQOAsMPd5VTtDh53EBtPNFE62MdeHVr',
               'X-Parse-REST-API-Key': 'O0LlHeH48pTytyyBz2NFEFGMwjKfSmukFbkjSVdE',
-              'X-Parse-Session-Token': this.myCurrentSessionToken,
+              'X-Parse-Session-Token': this.currentSessionToken,
             },
           },
         );
@@ -137,9 +139,6 @@ export default {
       catch (error) {
         console.error('Error while logging in user: ', error);
       }
-    },
-    toggleIsLogin() {
-      this.isLogin = !this.isLogin;
     },
   },
 };
