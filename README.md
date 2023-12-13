@@ -21,22 +21,22 @@ Conan Exiles Game Community Hub ---
 
 ## Screens:
 
-- Home (Landing page)
-- Hub (Dashboard for authenticated users | Navigation center for guests )
-- Guides (Existing game guides, created by authenticated users)
-    - Filter by category
-    - List all
-- Create (Create a new guide as an authenticated user)
+- Home (Landing page) <!-- - Hub (Dashboard for authenticated users | Navigation center for guests ) -->
+- Guides (Existing game guides) <!-- - Guides (Existing game guides, created by authenticated users) -->
+- Details (single guide)
+
+
 - Authentication form (Register | Login)
+<!-- - Create (Create a new guide as an authenticated user) -->
 - Profile
 
-## Sections:
+<!-- ## Sections:
 
 - Guides
 - Gameplay
 - News
 - Technical Info
-- User
+- User -->
 
 # &nbsp;
 
