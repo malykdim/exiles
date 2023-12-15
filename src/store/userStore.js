@@ -14,8 +14,8 @@ export const useUserStore = defineStore(
             setProfile(userData) {
                 this.user = userData;
                 this.isAuthenticated = true;
-                this.currentSessionToken = userData.sessionToken;
-                sessionStorage.setItem('user', JSON.stringify(this.userData));
+                this.currentSessionToken = this.user.data.sessionToken;
+                sessionStorage.setItem('user', JSON.stringify(userData));
 
                 console.log(this.user);
                 console.log(this.currentSessionToken);
@@ -30,9 +30,9 @@ export const useUserStore = defineStore(
                 this.user = JSON.parse(user);
                 this.isAuthenticated = true;
             },
-            logout() {
+            logoutUser() {
                 this.isAuthenticated = false;
-                this.profile = null;
+                this.user = null;
                 sessionStorage.removeItem('user');
             },
         },

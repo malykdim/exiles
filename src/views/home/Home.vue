@@ -19,7 +19,7 @@ export default {
   },
   methods: {
     onCta() {
-      this.$router.push({ path: '/auth' });
+      this.$router.push({ path: '/login' });
     },
   },
 };

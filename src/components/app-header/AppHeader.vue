@@ -1,6 +1,7 @@
 <script>
 import { mapState } from 'pinia';
 import { useUserStore } from '../../store/userStore.js';
+import { logout } from '../../dataProviders/auth.js';
 
 export default {
   data() {
@@ -9,14 +10,22 @@ export default {
         { url: '/hub', text: 'hub' },
         { url: '/guides', text: 'guides' },
         { url: '/create', text: 'create' },
-        { url: '/auth', text: 'login' },
-        { url: '/profile', text: 'profile' },
-        { url: '/logout', text: 'logout' },
       ],
     };
   },
   computed: {
-    ...mapState(useUserStore, ['user']),
+    ...mapState(useUserStore, ['user', 'currentSessionToken', 'logoutUser']),
+  },
+  methods: {
+    async logUserOut() {
+      const response = await logout(this.currentUserSessionToken);
+      console.log(response);
+
+      this.logoutUser();
+      console.log(this.user);
+
+      this.$router.push('/');
+    },
   },
 };
 </script>
@@ -40,10 +49,20 @@ export default {
               {{ page.text }}
             </router-link>
           </li>
+          <li v-if="!user">
+            <router-link to="/login">
+              <strong>login</strong>
+            </router-link>
+          </li>
           <li v-if="user">
             <router-link to="/profile">
-              <strong>username{{ user.username }}</strong>
+              <strong>{{ user.username }}</strong>
             </router-link>
+          </li>
+          <li v-if="user">
+            <button @click="logUserOut">
+              <strong>logout</strong>
+            </button>
           </li>
         </ul>
       </nav>

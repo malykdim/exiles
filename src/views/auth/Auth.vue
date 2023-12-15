@@ -1,6 +1,7 @@
 <!-- eslint-disable vue/max-attributes-per-line -->
 <script>
 import { mapActions } from 'pinia';
+import axios from 'axios';
 
 import { login, signup } from '../../dataProviders/auth';
 import { useUserStore } from '../../store/userStore';
@@ -29,6 +30,7 @@ export default {
         const userData = await login(this.user.username, this.user.password);
         console.log('login', this.user);
         console.log('userData', userData);
+        console.log('userData', userData.data.sessionToken);
         if (userData) {
           this.setProfile(userData);
           this.$router.push('/profile');

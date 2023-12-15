@@ -26,9 +26,6 @@ export async function signup(username, email, password) {
 
         //         this.currentSessionToken = response.body.sessionToken;
 
-        //         // save the token in localStorage
-        //         // redirect to Hub page or Profile page
-
         return response;
     }
     catch (error) {
@@ -64,7 +61,6 @@ export async function login(username, password) {
         // this.user = response.body; // objectId, createdAt and sessionToken
         // this.currentSessionToken = response.body.sessionToken;
         // save the token in localStorage
-        // redirect to Hub page or Profile page
 
         return response;
     }
@@ -93,13 +89,6 @@ export async function logout(currentSessionToken) {
             },
         );
         console.log('response: ', response);
-        // this.user = response.user; ??? null?
-
-        //         console.log(response);
-        //         this.user = null; // objectId, createdAt and sessionToken
-        //         this.currentSessionToken = null;
-        //         clear the token from localStorage
-        //         redirect to Home page
 
         return response;
     }

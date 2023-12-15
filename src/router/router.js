@@ -10,6 +10,7 @@ import Profile from '../views/profile/Profile.vue';
 import NotFound from '../components/wildcards/NotFound.vue';
 import CreateGuideForm from '../views/create/CreateGuideForm.vue';
 import Details from '../views/details/Details.vue';
+import Logout from '../components/logout/Logout.vue';
 
 function validateUser() {
     const userStore = useUserStore();
@@ -51,6 +52,10 @@ const routes = [
         path: '/profile',
         component: Profile,
         beforeEnter: validateUser,
+    },
+    {
+        path: '/logout',
+        component: Logout,
     },
     {
         path: '/:pathMatch(.*)*',

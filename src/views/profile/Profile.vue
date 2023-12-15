@@ -37,7 +37,7 @@ export default {
         Create Guide
       </router-link>
       <br><br>
-      <button>Logout</button>
+      <!-- <button>Logout</button> -->
     </article>
   </div>
 </template>
