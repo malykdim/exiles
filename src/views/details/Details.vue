@@ -20,18 +20,26 @@ export default {
 
 <template>
   <div>
-    <h4>Details</h4>
+    <!-- <h4>Details</h4> -->
     <Spinner v-if="isLoading" />
     <article v-else class="item">
-      <h4>{{ item.title }}</h4>
-      <p>{{ item.map }}</p>
+      <h4 class="title">
+        {{ item.title }}
+      </h4>
+      <h6 class="author">
+        by: <strong>{{ item.author }}</strong>
+      </h6>
       <div>
         <img :src="item.thumbnail" :alt="item.title">
-      </div><br>
+      </div><br><br>
       <div>
-        <p>{{ item.content }}</p>
-      </div>
-      <h6>{{ item.author }}</h6>
+        <p class="content">
+          {{ item.content }}
+        </p>
+      </div><br>
+      <h6 class="map">
+        map: {{ item.map }}
+      </h6>
     </article>
   </div>
 </template>
@@ -40,5 +48,24 @@ export default {
 .item {
   max-width: 60rem;
   margin: 0 auto;
+
+  .title {
+    font-family: 'Noto Serif', serif;
+    font-size: 100px;
+    font-weight: 100;
+  }
+  .map {
+    font-size: 1.2em;
+    font-weight: 100;
+  }
+  .author {
+    font-size: 1.5em;
+    font-weight: 100;
+  }
+  .content {
+    letter-spacing: .1em;
+    text-align: justify;
+    padding: 2rem;
+  }
 }
 </style>
