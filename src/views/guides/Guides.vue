@@ -97,7 +97,7 @@ export default {
         flex-wrap: wrap;
         gap: .5rem;
         align-items: center;
-  justify-content: center;
+        justify-content: center;
 
         .topics {
           padding: 1rem 2rem;

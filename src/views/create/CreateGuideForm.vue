@@ -8,13 +8,13 @@ import axios from 'axios';
 
 // import FormItem from './components/FormItem.vue';
 // import NestedSection from './components/NestedSection.vue';
-import GuideContent from './components/GuideContent.vue';
-import GuideDetails from './components/GuideDetails.vue';
+// import GuideContent from './components/GuideContent.vue';
+// import GuideDetails from './components/GuideDetails.vue';
 
 // import About from './components/About.vue';
 
 export default {
-  components: { GuideContent, GuideDetails },
+  // components: { GuideContent, GuideDetails },
   setup() {
     return {
       v$: useVuelidate(),
@@ -44,7 +44,6 @@ export default {
         console.log('success', this.guide);
       }
 
-      // make post request
       try {
         const response = await axios.post(
           'https://parseapi.back4app.com/classes/Guides',
@@ -55,7 +54,7 @@ export default {
             thumbnail: this.guide.thumbnail,
             type: this.guide.type,
             map: this.guide.map,
-            categories: [this.guide.categories],
+            categories: this.guide.categories,
             content: this.guide.content,
             year: this.guide.year.toString(),
             terms: true,
@@ -70,13 +69,12 @@ export default {
         );
 
         console.log(response.data);
-        return response.data;
+        // return response.data;
       }
       catch (error) {
         console.error(error.message);
-        return error.message;
+        // return error.message;
       }
-      // eslint-disable-next-line no-unreachable
       this.$router.push('/guides');
     },
 
@@ -96,7 +94,9 @@ export default {
 </script>
 
 <template>
-  <h4>Create Guide Form</h4>
+  <h4 class="heading">
+    Create Guide
+  </h4>
 
   <form class="create-guide container" @submit.prevent="onSubmit">
     <!-- <div class="summary">
@@ -159,7 +159,7 @@ export default {
               value="article"
               class="pico-background-pumpkin-250"
             >
-            <label for="article" class="label">Article</label>
+            <label for="article" class="label">article</label>
             <input
               id="video"
               v-model="guide.type"
@@ -167,7 +167,7 @@ export default {
               value="video"
               class="pico-background-pumpkin-250"
             >
-            <label for="video" class="label">Video</label>
+            <label for="video" class="label">video</label>
           </fieldset>
         </div>
 
@@ -183,7 +183,7 @@ export default {
               class="select"
             >
               <option value="" name="map" disabled>
-                Select a map
+                select a map
               </option>
               <option value="exiles" name="map">
                 The Exiled Lands
@@ -259,7 +259,7 @@ export default {
           </fieldset>
         </div>
 
-        <GuideDetails />
+        <!-- <GuideDetails /> -->
       </div>
 
       <!-- content, terms -->
@@ -280,7 +280,7 @@ export default {
             </div>
           </div>
         </div>
-        <GuideContent />
+        <!-- <GuideContent /> -->
       </div>
     </div><br>
 
@@ -311,6 +311,11 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+    .heading {
+      font-family: 'Noto Serif', serif;
+      font-size: 100px;
+      font-weight: 100;
+    }
     .create-guide {
       max-width: 1200px;
       margin: 3rem auto;
@@ -318,7 +323,7 @@ export default {
       .three-cols {
         display: grid;
         grid-template-columns: 360px 300px auto;
-        gap: 3rem;
+        gap: 1rem;
 
         .first, .second, .third  {
           border: 1px solid #f3f3f3;
@@ -327,7 +332,10 @@ export default {
               padding: 1rem;
               .fieldset {
                 .legend {
-                  font-size: smaller;
+                  // font-size: smaller;
+                  font-size: 24px;
+                  font-weight: 200;
+
                   .input {
 
                     &[type=radio], &[type=checkbox] {
@@ -335,12 +343,17 @@ export default {
                     }
                   }
                   .label {
-                  font-family: serif;
+                  font-family: 'Noto Serif', serif;
+                  font-size: smaller;
+                  font-weight: 200;
+
                   }
                 }
               }
               .label {
-                  font-family: serif;
+                  font-family: inherit;
+                  font-size: inherit;
+
               }
               .title {
                   font-family: serif;
